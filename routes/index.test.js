@@ -7,7 +7,6 @@ var tourdevoteModel = require('../bdd/SchemaTourdevote')
 var topModel = require('../bdd/SchemaTop');
 var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 const { TestScheduler } = require("jest");
-const { ExpectationFailed } = require("http-errors");
 
 //  --------------------TEST INITIAL de mise en place de jest  --------------------
 // describe('pack', function(){
@@ -45,72 +44,143 @@ const { ExpectationFailed } = require("http-errors");
 //   })
 // })
 
-// -------------------- TEST Event Ceation   --------------------
-
-
-// beforeAll(async () => {
-//   const url = `mongodb+srv://admin/30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority`
-//   await mongoose.connect(url, { useNewUrlParser: true })
-// })
-
-// test("eventCreation", async (done) => {
-//   var test = await request(app).post("/eventCreation")
-
-//   .send({
-//     "name": 'Test',
-//     "email": 'testing@gmail.com'
-//   })
-
-//     const user = await User.findOne({ email: 'testing@gmail.com' })
-
-//     expect(user.name).toBeTruthy()
-//     expect(user.email).toBeTruthy()
-
-//   done()
-  
-//   })
-
 //-------------------- TEST SignUP  --------------------
+
+  //   beforeAll(async () => {
+  //   var options = {
+  //     connectTimeoutMS: 5000,
+  //     useNewUrlParser: true,
+  //     useUnifiedTopology: true,
+  // }
+  //   mongoose.connect('mongodb+srv://admin:30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority', 
+  //   options,
+  //   function(err){
+  //     console.log(err)
+  // }
+  //   )
+  // })
+  
+  //   describe( 'test de la route signup', function () {
+  //      test("enregistrement d'un nouvel user en base de donnée s'il est inexistant", async (done) => {
+  //     const res = await request(app).post("/sign-up")
+    
+  //     .send({
+  //       username: 'fgg',
+  //       email: 'fgg'
+  //     })
+    
+  //       const user = await User.findOne({ email: 'fgg' })
+    
+  //       expect(user.body.username).resolves.toBeTruthy()
+  //       expect(user.body.email).resolves.toBeTruthy()
+    
+  //     done()
+      
+  //     })
+
+  //  })
+   
+
+
+    //-------------------- TEST SignIN  --------------------
+
+    // beforeAll(async () => {
+    //   var options = {
+    //     connectTimeoutMS: 5000,
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true,
+    // }
+    //   mongoose.connect('mongodb+srv://admin:30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority', 
+    //   options,
+    //   function(err){
+    //     console.log(err)
+    // }
+    //   )
+    // })
+
+    // afterAll(async() => {
+    //   await mongoose.connection.close()
+    // })
+
+    // describe('test route /sign-in', function (){
+    //   test('verification de user dans bdd sign-in', async(done) => {
+    //       await request(app).post("/sign-in")
+    
+    //   .send({
+    //     email: 'fgg',
+       
+    //   })
+    
+    //     const user = await User.findOne({ email: 'fgg' })
+    
+    //     expect(user.body.email).resolves.toBeTruthy()
+  
+    
+    //   done()
+      
+    //   })
+    //      test('verification de user non existant dans bdd sign-in', async(done) => {
+    //         await request(app).post("/sign-in")
+      
+    //     .send({
+    //       email: 'ze@ze',
+          
+    //     })
+      
+    //       const user = await User.findOne({ email: 'ze@ze' })
+      
+    //   expect(user.body.email).resolves.toBeUndefined()
+    
+      
+    //     done()
+        
+    //     })
+
+    // })
+
+
+//  -------------------- TEST Event Ceation   --------------------
+
+
     beforeAll(async () => {
-      const url = `mongodb+srv://admin/30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority`
+      const url = `mongodb+srv://admin:30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority`
       await mongoose.connect(url, { useNewUrlParser: true })
     })
-    
-    test("timer", async (done) => {
-      const res = await request(app).post("/sign-up")
-    
+  
+  describe ('test de la route eventCreation', function(){
+   test("eventCreation non existant", async (done) => {
+      var test = await request(app).post("/eventCreation")
+
       .send({
-        name: 'f',
-        email: 'f'
+        nameEvent: 'Test',
+        password: 'Test'
       })
-    
-        const user = await User.findOne({ email: 'f' })
-    
-        expect(user.body.name).resolves.toBeTruthy()
-        expect(user.body.email).resolves.toBeTruthy()
-    
+
+        const user = await User.findOne({ nameEvent: 'Test', password: "Test" })
+        
+        expect(user.nameEvent).toBeTruthy()
+        expect(user.password).toBeTruthy()
+
       done()
       
       })
-
-
-  // -------------------- TEST Affiche Timer   --------------------
-
-  // beforeAll(async () => {
-  //   const url = `mongodb+srv://admin/30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority`
-  //   await mongoose.connect(url, { useNewUrlParser: true })
-  // })
+      test("eventCreation  existant", async (done) => {
+        var test = await request(app).post("/eventCreation")
   
-  // test("timer", async (done) => {
-  //   const res = await request(app).post("/getEventName")
+        .send({
+          nameEvent: 'Anniv',
+          password: 'Anniv'
+        })
   
-  //   .send({
-  //     idUserFromFront: '5fa427a454f33488340d2432'
-  //   })
-  //   .expect(200)
-  //   .expect({result: "Anniv"})
+          const user = await User.findOne({ nameEvent: 'Anniv', password: "Anniv" })
+          
+          expect(user.nameEvent).toBeTruthy()
+          expect(user.password).toBeTruthy()
   
-  //   done()
-    
-  //   })
+        done()
+        
+        })
+})
+   
+
 
