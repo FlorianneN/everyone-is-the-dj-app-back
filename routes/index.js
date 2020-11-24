@@ -8,13 +8,14 @@ var eventModel = require('../bdd/SchemaEvent')
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
 var topModel = require('../bdd/SchemaTop');
 var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
-var server = require('../bin/www')
+// var server = require('../bin/www')
 
 
 // -------------------- route initiale --------------------------------------------------------
 router.get('/', function (req, res, next) {
-
-  res.render('index', { title: 'Express' });
+  // pour test JEST
+  res.send({ title: 'Express'})
+  //res.render('index', { title: 'Express'});
 });
 
 
