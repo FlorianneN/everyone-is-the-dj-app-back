@@ -1,12 +1,14 @@
 var app = require("../app")
 var request = require("supertest")
-var mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const dbHandler = require('./db-handler');
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
 var topModel = require('../bdd/SchemaTop');
 var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 const { TestScheduler } = require("jest");
+
 
 //  --------------------TEST INITIAL de mise en place de jest  --------------------
 // describe('pack', function(){
@@ -142,45 +144,46 @@ const { TestScheduler } = require("jest");
 //  -------------------- TEST Event Ceation   --------------------
 
 
-    beforeAll(async () => {
-      const url = `mongodb+srv://admin:30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority`
-      await mongoose.connect(url, { useNewUrlParser: true })
-    })
+//     beforeAll(async () => {
+//       const url = `mongodb+srv://admin:30094561@cluster0.xutoc.mongodb.net/EveryOneIsTheDJ?retryWrites=true&w=majority`
+//       await mongoose.connect(url, { useNewUrlParser: true })
+//     })
   
-  describe ('test de la route eventCreation', function(){
-   test("eventCreation non existant", async (done) => {
-      var test = await request(app).post("/eventCreation")
+//   describe ('test de la route eventCreation', function(){
+//    test("eventCreation non existant", async (done) => {
+//       var test = await request(app).post("/eventCreation")
 
-      .send({
-        nameEvent: 'Test',
-        password: 'Test'
-      })
+//       .send({
+//         nameEvent: 'Test',
+//         password: 'Test'
+//       })
 
-        const user = await User.findOne({ nameEvent: 'Test', password: "Test" })
+//         const user = await User.findOne({ nameEvent: 'Test', password: "Test" })
         
-        expect(user.nameEvent).toBeTruthy()
-        expect(user.password).toBeTruthy()
+//         expect(user.nameEvent).toBeTruthy()
+//         expect(user.password).toBeTruthy()
 
-      done()
+//       done()
       
-      })
-      test("eventCreation  existant", async (done) => {
-        var test = await request(app).post("/eventCreation")
+//       })
+//       test("eventCreation  existant", async (done) => {
+//         var test = await request(app).post("/eventCreation")
   
-        .send({
-          nameEvent: 'Anniv',
-          password: 'Anniv'
-        })
+//         .send({
+//           nameEvent: 'Anniv',
+//           password: 'Anniv'
+//         })
   
-          const user = await User.findOne({ nameEvent: 'Anniv', password: "Anniv" })
+//           const user = await User.findOne({ nameEvent: 'Anniv', password: "Anniv" })
           
-          expect(user.nameEvent).toBeTruthy()
-          expect(user.password).toBeTruthy()
+//           expect(user.nameEvent).toBeTruthy()
+//           expect(user.password).toBeTruthy()
   
-        done()
+//         done()
         
-        })
-})
-   
+//         })
+// })
+
+      
 
 
